@@ -1,6 +1,8 @@
 $(document).ready(async ()=>{
 	const $output = $('#output')
-	const pokemon = await $.getJSON('./pokemon.json')
+	const pokemonCollection = await $.getJSON('./pokemon.json')
 
-	$output.text(JSON.stringify(pokemon))
+	$output.append(pokemonCollection.map(pokemon=>{
+		return `<div class="pokemon ${pokemon.type.toLowerCase()}">${pokemon.id}. ${pokemon.name}<br />${pokemon.type}</div>`
+	}))
 })

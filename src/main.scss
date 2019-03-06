@@ -1,3 +1,6 @@
+$breakpoint: 500px;
+$media-big: (min-width: $breakpoint);
+$media-small: (max-width: $breakpoint - 1);
 $types: (
 	bug: #A8B820,
 	dragon: #7038F8,
@@ -16,28 +19,17 @@ $types: (
 	water: #6890F0
 );
 
-@each $type, $color in $types{
-	.#{$type}{
-		background-color: $color;
-		@if(lightness($color) > 50){
-			color: #000;
-		}@else{
-			color: #fff;
-		}
-	}
-}
-
-$breakpoint: 500px;
-$media-big: (min-width: $breakpoint);
-$media-small: (max-width: $breakpoint - 1);
-
 body{
 	font-size: 18px;
 	line-height: 1.6em;
 	text-align: center;
-	margin: 0;
+
+	& > div{
+		margin:10px auto;
+	}
 }
-#output{
+
+#pokemon-list{
 	display:flex;
 
 	@media #{$media-big}{
@@ -48,17 +40,39 @@ body{
 	@media #{$media-small}{
 		flex-direction:column;
 	}
-}
-.pokemon{
-	padding:10px 20px;
-	border-color: rgba(0,0,0,0.1);
-	border-style: solid;
 
-	@media #{$media-big}{
-		flex-grow:1;
-		border-width:0 0 1px 1px;
+	div{
+		padding:10px 20px;
+		border-color: rgba(0,0,0,0.1);
+		border-style: solid;
+	
+		@media #{$media-big}{
+			flex-grow:1;
+			border-width:0 0 1px 1px;
+		}
+		@media #{$media-small}{
+			border-width:0 0 1px 0;
+		}
 	}
-	@media #{$media-small}{
-		border-width:0 0 1px 0;
+}
+
+#pokemon-types{
+	& > *{
+		display: inline-block;
+		margin:0;
+	}
+	div{
+		padding: 5px 10px;
+	}
+}
+
+@each $type, $color in $types{
+	.type-#{$type}{
+		background-color: $color;
+		@if(lightness($color) > 50){
+			color: #000;
+		}@else{
+			color: #fff;
+		}
 	}
 }

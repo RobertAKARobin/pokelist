@@ -1,16 +1,20 @@
-# Pokélist
+# Intro to Sass/Gulp
 
-For teaching Gulp/SASS/Github Pages.
+What they are, what problems they solve, and how to use them.
 
-## SASS
+* Go to https://robertakarobin.com/sassgulp
+* 'View Source'
+* Look at the CSS file, [./dist/main.css](https://robertakarobin.com/sassgulp/dist/main.css)
 
-### What's the most repetitive part of [./dist/main.css](./dist/main.css)?
+## What's the problem with CSS?
+
+### 1. What's the most repetitive part of main.css?
 <details><summary> </summary>
 
 All the classes for Pokémon types.
 </details>
 
-### In [./dist/main.css](./dist/main.css), which lines occur more than once?
+### 2. In main.css, which lines occur more than once?
 
 Don't count blank lines and `}`. Hint: there are 6.
 
@@ -24,9 +28,91 @@ Don't count blank lines and `}`. Hint: there are 6.
 6.	10 x `color: #000;`
 </details>
 
-## Gulp
+### 3. What does 'DRY' mean, when it comes to code?
 
-### In [./gulpfile.js](./gulpfile.js), in `buildCSS`...
+<details><summary> </summary>
+Don't Repeat Yourself. If code contains a lot of repeated pieces, it's a very good sign that the code could be made more efficient.
+</details>
+
+## What's the solution? Sass.
+
+Go to https://robertakarobin.com/sassgulp/src/main.scss.
+
+This is the Sass that generated `main.css`. It's about half the size of `main.css`, and much less repetitive.
+
+There are two dialects of Sass: "Sass" and SCSS.
+
+SCSS means "Sassy CSS". It's "CSS plus". Regular CSS is valid SCSS.
+
+Sass looks different. Regular CSS is not valid Sass.
+
+### 1. What do the words that begin with `$` do?
+
+If this was JavaScript, what would we call them?
+
+<details><summary> </summary>
+
+Variables. Pieces of data you can re-use. Great for color palettes and media queries.
+</details>
+
+### 2. What does syntax `#{$like-this}` do?
+
+<details><summary> </summary>
+
+String interpolation. Lets you use variables inside of other variables.
+</details>
+
+### 3. In `$media-small`, what do you think is the value of `$breakpoint - 1`?
+
+<details><summary> </summary>
+
+`499px`. Sass lets you do math!
+</details>
+
+### 4. What JavaScript data type does `$types` resemble?
+
+<details><summary> </summary>
+
+An object, or map.
+</details>
+
+### 5. What programming concept is shown in the `@each` snippet at the end?
+
+<details><summary> </summary>
+
+Looping.
+</details>
+
+### 6. What does `#pokemon-types{ & > *{` mean? What if `& >` was removed?
+
+<details><summary> </summary>
+
+"Select all elements that are children of `#pokemon-types`."
+
+Without `& >`, it would mean, "Select all elements that are descendents of `#pokemon-types`."
+</details>
+
+### Other cool stuff
+
+* Nesting, in case you missed it
+* `@import` other SCSS files
+* `lightness` is built in
+* `@if/@else`
+* Lots of other useful stuff
+
+## You try Sass
+
+Do parts 1 and 1.5 of:
+
+https://github.com/RobertAKARobin/sassflag
+
+## What's the problem with Sass?
+
+Copying and pasting your Sass to a converter, and then back to a CSS file, is really annoying.
+
+## What's the solution? Gulp.
+
+### In [./gulpfile.js](https://www.robertakarobin.com/sassgulp/gulpfile.js), in `buildCSS`...
 
 What do you think the following snippets do/mean?
 
@@ -38,11 +124,11 @@ What do you think the following snippets do/mean?
 
 <details><summary> </summary>
 
-Gulp takes a SASS file, and spits out a CSS file.
+Gulp takes a Sass file, and spits out a CSS file.
 
 1. `src`: Which files Gulp should look at
 2. `pipe`: How Gulp passes data from one task to another
-3. `sass`: Converts SASS to CSS
+3. `sass`: Converts Sass to CSS
 4. `dest`: Where the resulting CSS should go
 5. `outputStyle: expanded`: Says the resulting CSS should be all pretty, instead of minified
 </details>
@@ -80,3 +166,7 @@ It indicates what files Gulp should "watch" for changes in.
 
 Note that `README.md` doesn't match any of the patterns in there -- there's no point in Gulp re-building everything when the README changes, because the README doesn't have any impact on the code.
 </details>
+
+## You try Gulp
+
+Do part 2 of https://github.com/RobertAKARobin/sassflag.

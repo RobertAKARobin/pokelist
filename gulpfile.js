@@ -1,33 +1,34 @@
-const gulp = require('gulp')
+const {src, dest, parallel, watch} = require('gulp')
 const sass = require('gulp-sass')
+const concat = require('gulp-concat')
+const uglifyJS = require('gulp-uglify-es').default
 
-gulp.task('build-js', ()=>{
-	return gulp.src([
-		'./src/*.js',
-		'./node_modules/jquery/dist/jquery.min.js'
+
+const buildJS = function(){
+	return src([
+		'./node_modules/jquery/dist/jquery.js',
+		'./src/*.js'
 	])
-	.pipe(gulp.dest('./dist'))
-})
+	.pipe(concat('main.js'))
+	.pipe(uglifyJS())
+	.pipe(dest('./dist'))
+}
 
-gulp.task('build-css', ()=>{
-	return gulp.src([
-		'./src/*.scss'
-	])
-	.pipe(sass({
-		outputStyle: 'expanded'
-	}))
-	.pipe(gulp.dest('./dist'))
-})
+const buildCSS = function(){
+	return src('./src/main.scss')
+	.pipe(sass({outputStyle: 'expanded'}))
+	.pipe(dest('./dist'))
+}
 
-gulp.task('build', gulp.series([
-	'build-js',
-	'build-css'
-]))
+const buildAll = parallel(buildJS, buildCSS)
 
-gulp.task('watch', ()=>{
-	gulp.watch([
+const watchAndBuild = function(){
+	return watch([
 		'./*.json',
 		'./*.html',
 		'./src/*'
-	], {ignoreInitial: false}, gulp.task('build'))
-})
+	], {ignoreInitial: false}, buildAll)
+}
+
+exports.build = buildAll
+exports.watch = watchAndBuild

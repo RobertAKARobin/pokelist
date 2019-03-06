@@ -3,6 +3,11 @@ const sass = require('gulp-sass')
 const concat = require('gulp-concat')
 const uglifyJS = require('gulp-uglify-es').default
 
+const buildCSS = function(){
+	return src('./src/main.scss')
+	.pipe(sass({outputStyle: 'expanded'}))
+	.pipe(dest('./dist'))
+}
 
 const buildJS = function(){
 	return src([
@@ -14,19 +19,12 @@ const buildJS = function(){
 	.pipe(dest('./dist'))
 }
 
-const buildCSS = function(){
-	return src('./src/main.scss')
-	.pipe(sass({outputStyle: 'expanded'}))
-	.pipe(dest('./dist'))
-}
-
 const buildAll = parallel(buildJS, buildCSS)
 
 const watchAndBuild = function(){
 	return watch([
-		'./*.json',
-		'./*.html',
-		'./src/*'
+		'./src/*.js',
+		'./src/*.scss'
 	], {ignoreInitial: false}, buildAll)
 }
 

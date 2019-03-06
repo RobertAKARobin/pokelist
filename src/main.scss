@@ -14,4 +14,51 @@ $types: (
 	psychic: #F85888,
 	rock: #B8A038,
 	water: #6890F0
-)
+);
+
+@each $type, $color in $types{
+	.#{$type}{
+		background-color: $color;
+		@if(lightness($color) > 50){
+			color: #000;
+		}@else{
+			color: #fff;
+		}
+	}
+}
+
+$breakpoint: 500px;
+$media-big: (min-width: $breakpoint);
+$media-small: (max-width: $breakpoint - 1);
+
+body{
+	font-size: 18px;
+	line-height: 1.6em;
+	text-align: center;
+	margin: 0;
+}
+#output{
+	display:flex;
+
+	@media #{$media-big}{
+		flex-direction:row;
+		flex-wrap:wrap;
+		justify-content:center
+	}
+	@media #{$media-small}{
+		flex-direction:column;
+	}
+}
+.pokemon{
+	padding:10px 20px;
+	border-color: rgba(0,0,0,0.1);
+	border-style: solid;
+
+	@media #{$media-big}{
+		flex-grow:1;
+		border-width:0 0 1px 1px;
+	}
+	@media #{$media-small}{
+		border-width:0 0 1px 0;
+	}
+}

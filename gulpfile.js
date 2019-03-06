@@ -14,8 +14,7 @@ gulp.task('build-css', ()=>{
 		'./src/*.scss'
 	])
 	.pipe(sass({
-		outputStyle: 'expanded',
-		sourceMap: 'non'
+		outputStyle: 'expanded'
 	}))
 	.pipe(gulp.dest('./dist'))
 })

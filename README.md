@@ -8,15 +8,9 @@ What they are, what problems they solve, and how to use them.
 
 ## What's the problem with CSS?
 
-### 1. What's the most repetitive part of main.css?
-<details><summary> </summary>
+### 1. What in main.css is repetitive?
 
-All the classes for Pokémon types.
-</details>
-
-### 2. In main.css, which lines occur more than once?
-
-Don't count blank lines and `}`. Hint: there are 6.
+What things *look* repetitive? What lines actually repeat? (Excluding blank lines and `}`, there are 6 lines that repeat -- one of them 10 times!)
 
 <details><summary> </summary>
 
@@ -28,7 +22,7 @@ Don't count blank lines and `}`. Hint: there are 6.
 6.	10 x `color: #000;`
 </details>
 
-### 3. What does 'DRY' mean, when it comes to code?
+### 2. What does 'DRY' mean, when it comes to code?
 
 <details><summary> </summary>
 Don't Repeat Yourself. If code contains a lot of repeated pieces, it's a very good sign that the code could be made more efficient.
@@ -40,11 +34,13 @@ Go to https://robertakarobin.com/sassgulp/src/main.scss.
 
 This is the Sass that generated `main.css`. It's about half the size of `main.css`, and much less repetitive.
 
+SASS goes in, CSS goes out.
+
 There are two dialects of Sass: "Sass" and SCSS.
 
-SCSS means "Sassy CSS". It's "CSS plus". Regular CSS is valid SCSS.
+SCSS means "Sassy CSS". It's CSS on steroids. Regular CSS is valid SCSS.
 
-Sass looks different. Regular CSS is not valid Sass.
+We're just using SCSS. Sass looks different. Regular CSS is not valid Sass.
 
 ### 1. What do the words that begin with `$` do?
 
@@ -55,35 +51,35 @@ If this was JavaScript, what would we call them?
 Variables. Pieces of data you can re-use. Great for color palettes and media queries.
 </details>
 
-### 2. What does syntax `#{$like-this}` do?
-
-<details><summary> </summary>
-
-String interpolation. Lets you use variables inside of other variables.
-</details>
-
-### 3. In `$media-small`, what do you think is the value of `$breakpoint - 1`?
+### 2. In `$media-small`, what do you think is the value of `$breakpoint - 1`?
 
 <details><summary> </summary>
 
 `499px`. Sass lets you do math!
 </details>
 
-### 4. What JavaScript data type does `$types` resemble?
+### 3. BONUS: What does syntax `#{$like-this}` do?
+
+<details><summary> </summary>
+
+String interpolation. Lets you use variables inside of other variables.
+</details>
+
+### 4. BONUS: What JavaScript data type does `$types` resemble?
 
 <details><summary> </summary>
 
 An object, or map.
 </details>
 
-### 5. What programming concept is shown in the `@each` snippet at the end?
+### 5. BONUS: What programming concept is shown in the `@each` snippet at the end?
 
 <details><summary> </summary>
 
 Looping.
 </details>
 
-### 6. What does `#pokemon-types{ & > *{` mean? What if `& >` was removed?
+### 6. BONUS: What does `#pokemon-types{ & > *{` mean? What if `& >` was removed?
 
 <details><summary> </summary>
 
@@ -111,6 +107,33 @@ https://github.com/RobertAKARobin/sassflag
 Copying and pasting your Sass to a converter, and then back to a CSS file, is really annoying.
 
 ## What's the solution? Gulp.
+
+### Two non-Gulp questions first:
+
+#### 1. In plain English, what's the purpose of a pipe, like a sewage pipe or gas pipe?<summary>
+
+<details><summary> </summary>
+
+It moves stuff from Point A to Point B.
+</details>
+
+#### 2. Are these two pieces of JavaScript functionally identical?
+
+```js
+thing.function1().function2().function3()
+```
+
+```js
+thing
+  .function1()
+  .function2()
+  .function3()
+```
+
+<details><summary> </summary>
+
+Yes. JavaScript doesn't care about newlines here.
+</details>
 
 ### In [./gulpfile.js](https://www.robertakarobin.com/sassgulp/gulpfile.js), in `buildCSS`...
 
@@ -147,7 +170,6 @@ Gulp takes a Sass file, and spits out a CSS file.
 3. `concat` combines multiple files into one
 4. `uglifyJS` removes spaces, long variable names, etc. from the code, reducing its file size
 </details>
-
 
 ### We see `parallel` used here...
 
